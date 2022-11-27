@@ -1,0 +1,16 @@
+CREATE SCHEMA service
+----
+CREATETABLEservice.users (id SERIAL NOT NULL, full_name VARCHAR(50) NOT NULL, login VARCHAR(50) NOT NULL,password VARCHAR(50) NOT NULL);
+--------------------------
+INSERT INTO service.users (full_name, login,password)
+VALUES
+('Онойко Д.В.','onoyko','1111'),
+('Назаров Н.П.','nazarow','2222'),
+('Сорокин П.В.','sorokin','3333'),
+('Кудряшова М.С.','kydriashova','4444'),
+('Данилова В.Д.','danilova','5555'),
+('Жоров П.А.','zhorov','6666'),
+('Татти В.И.','tatti','7777'),
+('Агафонов И.Л.','agafonov','8888'),
+('Герщук И.О.','gershyk','9999'),
+('Ремизов Е.К.','remizov','0000')

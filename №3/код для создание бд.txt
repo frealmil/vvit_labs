@@ -1,0 +1,67 @@
+create database mtuci_db
+------------
+create table kafedra
+(
+id serial primary key,
+title varchar (60) not null,
+decanat varchar (120) not null
+);
+
+create table grupa
+(
+id serial primary key,
+title varchar (70) not null,
+kafedra varchar (140) not null,
+fk_grupa_kafedra int references kafedra (id)
+);
+
+create table students
+(
+id serial primary key,
+naame varchar (150) not null,
+passport int not null,
+grupa varchar (75) not null,
+fk_students_grupa int references grupa(id),
+rate int
+);
+------------
+insert into kafedra (title,decanat)
+values 
+('Общая теория связи', 'Теория связи'),
+('Сети связи и системы коммутации', 'Сети и системы связи');
+
+insert into grupa (title, kafedra,fk_grupa_kafedra) 
+values 
+('ОТС01','Общая теория связи',1),
+('ОТС02','Общая теория связи',1),
+('ССиСК01','Сети связи и системы коммутации',2),
+('ССиСк02','Сети связи и системы коммутации',2);
+
+insert into students (naame,passport,grupa,fk_students_grupa, rate)
+values 
+('Онойко Д.В.',1234,'ОТС1',1,trunc(random()*(1001-500)+500)),
+('Назаров Н.П.',1345,'ОТС1',1,trunc(random()*(1001-500)+500)),
+('Сорокин П.В.',1456,'ОТС1',1,trunc(random()*(1001-500)+500)),
+('Кудряшова М.С.',1567,'ОТС1',1,trunc(random()*(1001-500)+500)),
+('Данилова В.Д.',1678,'ОТС1',1,trunc(random()*(1001-500)+500)),
+('Жоров П.А.',2345,'ОТС2',2,trunc(random()*(1001-500)+500)),
+('Татти В.И.',2456,'ОТС2',2,trunc(random()*(1001-500)+500)),
+('Агафонов И.Л.',2567,'ОТС2',2,trunc(random()*(1001-500)+500)),
+('Герщук И.О.',2789,'ОТС2',2,trunc(random()*(1001-500)+500)),
+('Ремизов Е.К.',2890,'ОТС2',2,trunc(random()*(1001-500)+500)),
+('Фомин Д.Ф.',3456,'ССтСК01',3,trunc(random()*(1001-500)+500)),
+('Печин Н.Д.',3567,'ССтСК01',3,trunc(random()*(1001-500)+500)),
+('Боровкова А.С.',3678,'ССтСК01',3,trunc(random()*(1001-500)+500)),
+('Волжанкин Д.В.',3890,'ССтСК01',3,trunc(random()*(1001-500)+500)),
+('Ласкус А.Н.',3901,'ССтСК01',3,trunc(random()*(1001-500)+500)),
+('Закурин И.В.',4567,'ССтСК02',4,trunc(random()*(1001-500)+500)),
+('Санжаров А.И.',4678,'ССтСК02',4,trunc(random()*(1001-500)+500)),
+('Вознюк Н.А.',4890,'ССтСК02',4,trunc(random()*(1001-500)+500)),
+('Михов И.С.',4012,'ССтСК02',4,trunc(random()*(1001-500)+500)),
+('Баталин В.В.',4123,'ССтСК02',4,trunc(random()*(1001-500)+500));
+------------
+SELECT DISTINCT id, naame,passport,grupa,fk_students_grupa,rate
+FROM students
+WHERE MOD(passport, 2) = 0
+ORDER BY rate DESC
+
